@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <!--引入数据库连接配置信息-->
+    <!--引用mybatis-generator驱动 已导入包，可以不用引用-->
+    <!--<classPathEntry location="E:\maven-repository\org\mybatis\generator\mybatis-generator-core\1.3.7\mybatis-generator-core-1.3.7.jar"/>-->
+    <!--context:
+        id:唯一标识
+        targetRuntime：运行时环境。MyBatis3DynamicSql(默认值)|MyBatis3|MyBatis3Simple
+        defaultModelType：生成对象类型。conditional|flat|hierarchical
+    -->
+    <context id="mysql_generator" defaultModelType="flat"
+             targetRuntime="MyBatis3">
+        <!--javaFileEncoding 设置生成的文件编码格式。不设置，使用平台默认编码-->
+        <property name="javaFileEncoding" value="UTF-8"/>
+        <!--targetJava8 设置生成的代码可以使用Java8+功能。默认值true-->
+        <property name="targetJava8" value="true"/>
+
+        <!--plugin 插件配置-->
+        <!--<plugin type=""></plugin>-->
+
+        <!--commentGenerator 注释相关设置 -->
+        <commentGenerator>
+            <!--设置 生成的代码是否包含注释 默认false 生成注释。 true：不生成注释-->
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+        <!-- 数据库连接配置 connectionFactory和jdbcConnection 标签二选一-->
+        <!--<connectionFactory>-->
+            <!--<property name="driverClass" value="${driver}"/>-->
+            <!--<property name="connectionURL" value="${url}"/>-->
+            <!--<property name="userId" value="${username}"/>-->
+            <!--<property name="password" value="${password}"/>-->
+        <!--</connectionFactory>-->
+        <!-- 数据库连接配置 connectionFactory和jdbcConnection 标签二选一-->
+        <jdbcConnection
+        driverClass="com.mysql.jdbc.Driver"
+        connectionURL="jdbc:mysql://localhost:3306/SSM"
+        userId="root"
+        password="root"
+        />
+
+        <!--Java类型解析器用于根据数据库列信息计算Java类型-->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <!--定义Java模型生成器的属性
+               targetPackage:生成代码存放的package的位置
+               targetProject:生成的代码存放的项目路径
+        -->
+        <javaModelGenerator targetPackage="com.luguz.bean"
+                            targetProject=".\src\main\java">
+            <!-- enableSubPackages:是否让schema作为包的后缀 -->
+            <property name="enableSubPackages" value="false" />
+            <!-- 从数据库返回的值被清理前后的空格 -->
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+
+        <!--mapper xml文件位置-->
+        <sqlMapGenerator targetPackage="mapper" targetProject=".\src\main\resources">
+            <!-- enableSubPackages:是否让schema作为包的后缀 默认false -->
+            <property name="enableSubPackages" value="false" />
+        </sqlMapGenerator>
+
+        <!--mapper接口生成的位置 dao-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.luguz.dao" targetProject=".\src\main\java">
+            <!-- enableSubPackages:是否让schema作为包的后缀 默认false -->
+            <property name="enableSubPackages" value="false" />
+        </javaClientGenerator>
+
+        <table tableName="emp_dept" domainObjectName="Dept"></table>
+        <table tableName="emp_user" domainObjectName="Employee"></table>
+    </context>
+
+</generatorConfiguration>
